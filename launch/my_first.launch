@@ -1,0 +1,11 @@
+<launch>
+    <group ns="new_ns">
+        <include file="$(find study_pkg)/launch/another_one.launch" />
+        <node name="receiver" pkg="rospy_tutorials" type="listener.py" output="screen">
+            <remap from="chatter" to="my_topic"/>
+        </node>
+        <node name="sender" pkg="rospy_tutorials" type="talker.py" output="screen">
+            <remap from="chatter" to="my_topic"/>
+        </node>
+    </group>
+</launch>
