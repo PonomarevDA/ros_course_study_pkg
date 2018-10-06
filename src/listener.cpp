@@ -1,9 +1,10 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
+#include <study_pkg/Control.h>
 
-void topicCallback(const std_msgs::String& msg)
+void topicCallback(const study_pkg::Control::ConstPtr& msg)
 {
-  ROS_INFO("I heard: [%s]", msg.data.c_str());
+  ROS_INFO("Speed: %d / Steer: %d", msg->speed, msg->steer);
 }
 
 int main(int argc, char **argv)
