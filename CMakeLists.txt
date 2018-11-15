@@ -7,6 +7,12 @@ set(TALKER_NODE_SRC  src/talker.cpp)
 set(LISTENER_NODE_NAME listener_cpp)
 set(LISTENER_NODE_SRC  src/listener.cpp)
 
+set(POLY_SERVER_NODE_NAME poly_server_cpp)
+set(POLY_SERVER_NODE_SRC  src/poly_server.cpp)
+
+set(POLY_CLIENT_NODE_NAME poly_client_cpp)
+set(POLY_CLIENT_NODE_SRC  src/poly_client.cpp)
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
@@ -61,11 +67,10 @@ add_message_files(
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  Poly.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -144,6 +149,9 @@ include_directories(
 add_executable(${TALKER_NODE_NAME} ${TALKER_NODE_SRC})
 add_executable(${LISTENER_NODE_NAME} ${LISTENER_NODE_SRC})
 
+add_executable(${POLY_SERVER_NODE_NAME} ${POLY_SERVER_NODE_SRC})
+add_executable(${POLY_CLIENT_NODE_NAME} ${POLY_CLIENT_NODE_SRC})
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -155,9 +163,15 @@ add_executable(${LISTENER_NODE_NAME} ${LISTENER_NODE_SRC})
 add_dependencies(${TALKER_NODE_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(${LISTENER_NODE_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
+add_dependencies(${POLY_SERVER_NODE_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${POLY_CLIENT_NODE_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${TALKER_NODE_NAME} ${catkin_LIBRARIES} )
 target_link_libraries(${LISTENER_NODE_NAME} ${catkin_LIBRARIES} )
+
+target_link_libraries(${POLY_SERVER_NODE_NAME} ${catkin_LIBRARIES} )
+target_link_libraries(${POLY_CLIENT_NODE_NAME} ${catkin_LIBRARIES} )
 
 #############
 ## Install ##

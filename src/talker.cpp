@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     msg.steer = 20;
     msg.speed = 10;
 
-    ROS_INFO("Transmited from cpp: speed = %d, steer = %d", msg.speed, msg.stee);
+    ROS_INFO("Transmited from cpp: speed = %d, steer = %d", msg.speed, msg.steer);
 
     pub.publish(msg);
 
